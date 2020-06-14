@@ -3,7 +3,7 @@ FROM python:3.7-slim
 # install dependencies
 RUN  apt-get update \
   && apt-get upgrade -y \
-  && apt-get install --no-install-recommends -y wget unzip xvfb libxtst6 libxrender1 python3.7-dev build-essential net-tools x11-utils socat 
+  && apt-get install --no-install-recommends -y wget unzip xvfb libxtst6 libxrender1 python3.7-dev build-essential net-tools x11-utils socat \
   && pip install ib_insync google-cloud-secret-manager
 
 # set environment variables
