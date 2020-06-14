@@ -3,7 +3,8 @@ FROM python:3.7-slim
 # install dependencies
 RUN  apt-get update \
   && apt-get upgrade -y \
-  && apt-get install --no-install-recommends -y wget unzip xvfb libxtst6 libxrender1 python3.7-dev build-essential net-tools x11-utils socat
+  && apt-get install --no-install-recommends -y wget unzip xvfb libxtst6 libxrender1 python3.7-dev build-essential net-tools x11-utils socat 
+  && pip install ib_insync google-cloud-secret-manager
 
 # set environment variables
 ENV TWS_INSTALL_LOG=/root/Jts/tws_install.log \
@@ -11,7 +12,10 @@ ENV TWS_INSTALL_LOG=/root/Jts/tws_install.log \
     ibcPath=/opt/ibc \
     javaPath=/opt/i4j_jres \
     twsPath=/root/Jts \
-    twsSettingsPath=/root/Jts
+    twsSettingsPath=/root/Jts \
+    DISPLAY=:0 \
+    GCP_SECRET=False \
+    IBGW_PORT=4002
 
 # make dirs
 RUN mkdir -p /tmp && mkdir -p ${ibcPath} && mkdir -p ${twsPath}
@@ -51,14 +55,6 @@ COPY src/bootstrap.py /root/bootstrap.py
 RUN chmod +x /root/bootstrap.py
 COPY src/ib_account.py /root/ib_account.py
 RUN chmod +x /root/ib_account.py
-
-RUN pip install ib_insync google-cloud-secret-manager
-
-# set display environment variable (must be set after TWS installation)
-ENV DISPLAY=:0
-ENV GCP_SECRET=False
-
-ENV IBGW_PORT 4002
 
 EXPOSE $IBGW_PORT
 
