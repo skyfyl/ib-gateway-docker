@@ -28,6 +28,9 @@ RUN chmod +x ${ibcPath}/*.sh ${ibcPath}/*/*.sh
 # install TWS, write output to file so that we can parse the TWS version number later
 RUN yes n | /tmp/ibgw.sh > ${TWS_INSTALL_LOG}
 
+# remove unneeded dependencies
+RUN apt-get purge wget unzip build-essential
+
 # remove downloaded files
 RUN rm /tmp/ibgw.sh /tmp/IBC.zip
 
