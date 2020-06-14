@@ -31,6 +31,9 @@ RUN yes n | /tmp/ibgw.sh > ${TWS_INSTALL_LOG}
 # remove unneeded dependencies
 RUN apt-get -y purge wget unzip build-essential
 
+# remove apt cache
+RUN rm -rf /var/lib/apt/lists/*
+
 # remove downloaded files
 RUN rm /tmp/ibgw.sh /tmp/IBC.zip
 
