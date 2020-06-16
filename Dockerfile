@@ -13,7 +13,6 @@ ENV TWS_INSTALL_LOG=/root/Jts/tws_install.log \
     javaPath=/opt/i4j_jres \
     twsPath=/root/Jts \
     twsSettingsPath=/root/Jts \
-    DISPLAY=:0 \
     GCP_SECRET=False \
     IBGW_PORT=4002
 
@@ -55,6 +54,8 @@ COPY src/bootstrap.py /root/bootstrap.py
 RUN chmod +x /root/bootstrap.py
 COPY src/ib_account.py /root/ib_account.py
 RUN chmod +x /root/ib_account.py
+
+ENV DISPLAY=:0
 
 EXPOSE $IBGW_PORT
 
