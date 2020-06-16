@@ -3,6 +3,7 @@
 **/*.pyo
 **/*.pyd
 .github
+examples
 test
 requirements-test.txt
 .gitignore
