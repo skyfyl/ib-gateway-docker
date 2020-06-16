@@ -37,7 +37,7 @@ RUN apt-get -y purge wget unzip build-essential
 # remove apt cache
 RUN rm -rf /var/lib/apt/lists/*
 RUN apt-get autoclean
-RUN apt-get autoremove
+RUN apt-get -y autoremove
 
 # remove downloaded files
 RUN rm /tmp/ibgw.sh /tmp/IBC.zip
