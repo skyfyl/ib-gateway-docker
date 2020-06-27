@@ -2,7 +2,9 @@
 set -e
 
 echo "Starting Xvfb..."
-rm -f /tmp/.X0-lock
+if [ -f  /tmp/.X0-lock ]; then
+  rm -f /tmp/.X0-lock
+fi
 /usr/bin/Xvfb "$DISPLAY" -ac -screen 0 1024x768x16 +extension RANDR &
 
 echo "Waiting for Xvfb to be ready..."

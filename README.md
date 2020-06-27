@@ -67,6 +67,25 @@ Run the tests
 pytest
 ```
 
+# X11 Forwarding
+
+***Tested in Ubuntu enviroment ONLY!***
+
+Grant permission
+
+```bash
+xhost +local:root # for the lazy and reckless
+```
+
+Execute `docker run`
+
+```bash
+docker run --env-file .env \
+-v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+-e "DISPLAY=${DISPLAY:-:0.0}" \
+manhinhang/ib-gateway-docker
+```
+
 # Github Actions for continuous integration
 
 After forking `IB Gateway docker` repository, you need config your **interactive brokers** paper account & password in *github secret*
