@@ -1,4 +1,4 @@
-from ib_insync import IBC, IB
+from ib_insync import IBC, IB, Watchdog
 import os
 import logging
 from ib_account import IBAccount
