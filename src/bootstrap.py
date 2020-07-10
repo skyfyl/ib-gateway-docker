@@ -15,7 +15,7 @@ def ping():
     while not ib.isConnected():
         try:
             IB.sleep(1)
-            ib.connect('localhost', 4001, clientId=1)
+            ib.connect('localhost', 4001, clientId=2)
         except (ConnectionRefusedError, OSError) as e:
             if type(e) is TimeoutError:
                 raise e
