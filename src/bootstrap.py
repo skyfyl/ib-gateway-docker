@@ -23,13 +23,21 @@ def ping():
     
     ib.disconnect()
 
+def onConnected():
+    print(ib.accountValues())
+
 if __name__ == "__main__":
     ib_gateway_version = int(os.listdir("/root/Jts/ibgateway")[0])
     account = IBAccount.account()
     password = IBAccount.password()
     trade_mode = IBAccount.trade_mode()
+    ib = IB()
+    ib.connectedEvent += onConnected
     ibc = IBC(ib_gateway_version, gateway=True, tradingMode=trade_mode, userid=account, password=password)
-    ibc.start()
+    watchdog = Watchdog(ibc, ib, port=4001)
+    watchdog.start()
+    ib.run()
+    # ibc.start()
     ping()
     logging.info('IB gateway is ready.')
     
