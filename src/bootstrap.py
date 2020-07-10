@@ -34,7 +34,7 @@ if __name__ == "__main__":
     ib = IB()
     ib.connectedEvent += onConnected
     ibc = IBC(ib_gateway_version, gateway=True, tradingMode=trade_mode, userid=account, password=password)
-    watchdog = Watchdog(ibc, ib, port=4001)
+    watchdog = Watchdog(ibc, ib, port=4002, connectTimeout=60, appStartupTime=60*5, appTimeout=60*2, retryDelay=30)
     watchdog.start()
     ib.run()
     # ibc.start()
