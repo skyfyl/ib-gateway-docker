@@ -27,7 +27,7 @@ def ping():
 
 def onConnected():
     # logging.INFO(ib.accountValues())
-    logging.INFO('ib onConnected event')
+    logging.info('ib onConnected event')
 
 if __name__ == "__main__":
     ib_gateway_version = int(os.listdir("/root/Jts/ibgateway")[0])
