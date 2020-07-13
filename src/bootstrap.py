@@ -4,6 +4,8 @@ import logging
 from ib_account import IBAccount
 import signal
 
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
 def ping():
     def timeout_handler(signum, frame):
         signal.alarm(0)
@@ -24,7 +26,8 @@ def ping():
     ib.disconnect()
 
 def onConnected():
-    print(ib.accountValues())
+    # logging.INFO(ib.accountValues())
+    logging.INFO('ib onConnected event')
 
 if __name__ == "__main__":
     ib_gateway_version = int(os.listdir("/root/Jts/ibgateway")[0])
@@ -38,6 +41,6 @@ if __name__ == "__main__":
     watchdog.start()
     ib.run()
     # ibc.start()
-    ping()
-    logging.info('IB gateway is ready.')
+    # ping()
+    # logging.info('IB gateway is ready.')
     
