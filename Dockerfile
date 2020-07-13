@@ -46,6 +46,11 @@ RUN chmod +x /root/bootstrap.py
 COPY src/ib_account.py /root/ib_account.py
 RUN chmod +x /root/ib_account.py
 
+# copy ib_insync
+RUN mkdir -p /root/ib_insync
+COPY src/ib_insync /root/ib_insync/
+RUN chmod -R +x /root/ib_insync
+
 RUN pip install ib_insync google-cloud-secret-manager
 
 # set display environment variable (must be set after TWS installation)
