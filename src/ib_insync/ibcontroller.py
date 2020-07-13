@@ -370,6 +370,7 @@ class Watchdog:
     retryDelay: float = 2
     readonly: bool = False
     maxRetry: int = 3
+    ibReqTimeout: int = 30
 
     def __post_init__(self):
         self.startingEvent = Event('startingEvent')
@@ -440,14 +441,17 @@ class Watchdog:
                         'MIDPOINT', False)
                     bars = None
                     with suppress(asyncio.TimeoutError):
-                        bars = await asyncio.wait_for(probe, 30)
+                        bars = await asyncio.wait_for(probe, self.ibReqTimeout)
                     if not bars:
                         if i >= self.maxRetry:
+                            self._logger.debug('Soft timeout, all retry: {}, restart app'.format(i))
                             self.hardTimeoutEvent.emit(self)
                             raise Warning('Hard timeout')
                         else:
+                            self._logger.debug('Soft timeout, retry: {}, timeout: {}'.format(i, self.ibReqTimeout))
                             i +=1
                     else:
+                        self._logger.debug('get ib reqHistoricalDataAsync ok')
                         i =1
                     self.ib.setTimeout(self.appTimeout)
                     
