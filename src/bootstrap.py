@@ -3,8 +3,13 @@ import os
 import logging
 from ib_account import IBAccount
 import signal
+import datetime
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+pre_date = datetime.datetime.now().date()
+all_count = 0
+today_count = 0
 
 def ping():
     def timeout_handler(signum, frame):
@@ -28,6 +33,13 @@ def ping():
 def onConnected():
     # logging.INFO(ib.accountValues())
     logging.info('ib onConnected event')
+    all_count += 1
+    n_time = datetime.datetime.now().date()
+    if pre_date < n_time:
+        today_count = 1
+    else:
+        today_count +=1
+    logging.info('ib restart, all: {}, today: {}'.format(all_count, today_count))
 
 if __name__ == "__main__":
     ib_gateway_version = int(os.listdir("/root/Jts/ibgateway")[0])
