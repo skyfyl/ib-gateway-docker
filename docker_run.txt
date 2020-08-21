@@ -1,0 +1,4 @@
+docker run -d --env IB_ACCOUNT=  --env IB_PASSWORD= --env TRADE_MODE=paper -p 4003:4002 --name ib-gateway-docker kobedocker24/ib-gateway-docker:3.8.2 tail -f /dev/null
+
+
+kobedocker24/ib-gateway-docker
